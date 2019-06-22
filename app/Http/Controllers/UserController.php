@@ -21,7 +21,10 @@ class UserController extends Controller
             abort(404,"Unauthorized Access");
         }
 
-        $user = User::where('status', 'Active')->paginate(2);
+        $user = User::where([
+            ['status', 'Active'],
+            ['role', 'Customer']
+            ])->paginate(2);
         return view('pages.user', compact('user'));
     }
 
