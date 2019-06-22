@@ -28,11 +28,13 @@
                 </a>
                     <ul class="nav justify-content-center">
                         <li class="nav-item">
-                            <a class="nav-link active" href="#">Products</a>
+                            <a class="nav-link active" href="/product">Products</a>
                         </li>
+                        @can('isAdmin')
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Users</a>
+                            <a class="nav-link" href="/user">Users</a>
                         </li>
+                        @endcan
                     </ul>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
