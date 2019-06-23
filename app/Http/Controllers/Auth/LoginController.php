@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -38,13 +39,28 @@ class LoginController extends Controller
     }
 
     /**
-     * Get the needed authorization credentials from the request.
+     * The user has been authenticated.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return array
+     * @param  mixed  $user
+     * @return mixed
      */
-    protected function credentials(\Illuminate\Http\Request $request)
+    protected function authenticated(Request $request, $user)
     {
-        return ['email' => $request->{$this->username()}, 'password' => $request->password, 'status' => 'Active'];
+        if ($user->status == 'Inactive') {
+
+            $message = 'Your Account is Deactivated, Please contact the Administrator';
+
+            // Log the user out.
+            $this->logout($request);
+
+            // Return them to the log in form.
+            return redirect()->back()
+                ->withInput($request->only($this->username(), 'remember'))
+                ->withErrors([
+                    // This is where we are providing the error message.
+                    $this->username() => $message,
+                ]);
+        }
     }
 }
