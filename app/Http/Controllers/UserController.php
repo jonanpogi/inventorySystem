@@ -24,7 +24,7 @@ class UserController extends Controller
         $user = User::where([
             ['status', 'Active'],
             ['role', 'Customer']
-            ])->paginate(2);
+            ])->paginate(5);
         return view('pages.user', compact('user'));
     }
 

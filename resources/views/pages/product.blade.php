@@ -17,7 +17,7 @@
             <table class="table table-hover" id="product-table">
             <thead class="thead-dark">
                 <tr>
-                <th scope="col">ID</th>
+
                 <th scope="col">Name</th>
                 <th scope="col">Category</th>
                 <th scope="col">Price</th>
@@ -26,7 +26,7 @@
             </thead>
             <tbody>
                 <tr>
-                <th scope="row">1</th>
+
                 <td>test</td>
                 <td>test</td>
                 <td>123</td>
