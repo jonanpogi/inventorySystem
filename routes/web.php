@@ -17,6 +17,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('user', 'UserController@index');
-Route::get('product', 'ProductController@index');
-Route::view('/product','pages.product');
+
+Route::get('/product', 'ProductController@index');
+
+//route of ajaxusers
+Route::resource('ajaxusers','UserAjaxController');
+Route::resource('user', 'UserController');
+
+
