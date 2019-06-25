@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Product;
+use App\User;
 use Illuminate\Http\Request;
+use DataTables;
+use App\Product;
+use App\Category;
 
 class ProductController extends Controller
 {
@@ -12,9 +15,20 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        // $product = Product::all();
+        //USE THIS METHOD ELOQUENT DISPLAY
+        // $arr = array();
+        // foreach($product as $products){
+        //     $arr[]=array(
+        //         'prod_id'=>$products->id,
+        //         'prod_name'=>$products->name,
+        //         'category'=>$products->categories->name,
+        //     );        
+        // }
+        $products = Product::latest()->paginate(5);
+        return view('pages.product',compact('products'));
     }
 
     /**
@@ -24,7 +38,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $category = Category::all();
+        return view('pages.createProduct',compact('category'));
     }
 
     /**
@@ -35,7 +50,15 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'price' => 'required',
+            'category_id' => 'required',
+        ]);
+  
+        Product::create($request->all());
+   
+        return redirect()->route('product.index')->with('success','Product created successfully.');
     }
 
     /**
@@ -56,8 +79,10 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Product $product)
-    {
-        //
+    {   
+        // $category = Category::all();
+        // return view('pages.editProduct')->with($category);
+        return view('pages.editProduct',compact('product'));
     }
 
     /**
@@ -69,7 +94,15 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'price' => 'required',
+            
+        ]);
+  
+        $product->update($request->all());
+  
+        return redirect()->route('product.index')->with('success','Product updated successfully');
     }
 
     /**
@@ -80,6 +113,8 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+  
+        return redirect()->route('product.index')->with('success','Product deleted successfully');
     }
 }

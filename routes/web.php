@@ -18,10 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 
-Route::get('/product', 'ProductController@index');
-
-//route of ajaxusers
 Route::resource('ajaxusers','UserAjaxController');
 Route::resource('user', 'UserController');
-
+Route::resource('product', 'ProductController');
 

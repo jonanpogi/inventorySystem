@@ -10,51 +10,49 @@
                     <h3>Products</h3>
                 </div>
                 <div class="col-4">
-                    <button class="btn btn-primary" style="float: right;">Add Products</button>
+                    <a class="btn btn-primary btn-sm" style="float: right;" href="{{ route('product.create') }}">Add Products</a>
                 </div>
             </div>
             
             <table class="table table-hover product-table">
             <thead class="thead thead-dark">
                 <tr>
-                    <th>No</th>
                     <th>Name</th>
                     <th>Price</th>
                     <th>Category</th>
                     <th width="280px">Action</th>
                 </tr>
             <tbody>
+            @foreach($products as $product)
+                <tr>
+                    <td>{{$product->name}}</td>
+                    <td>{{$product->price}}</td>
+                    <td>{{$product->categories->name}}</td>
+                    <td>
+                    @can('isAdmin')
+                    <form action="{{ route('product.destroy',$product->id) }}" method="POST">
+        
+                        <a class="btn btn-primary btn-sm" href="{{ route('product.edit',$product->id) }}">Edit</a>
+    
+                        @csrf
+                        @method('DELETE')
+        
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                    @endcan
+                    @can('isCustomer')
+                        <button type="submit" class="btn btn-danger btn-sm">Add to Cart</button>
+                    @endcan
+                    </td>
+                </tr>
+            @endforeach
             </tbody>
         </table>
+        {{ $products->links() }}
         </div>
     </div>
 </div>
 </main>
 </div>
 </body>
-<footer>
-    <script>
-        $(function () {
-     
-        $.ajaxSetup({
-        headers: {
-             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-        });
-        //displaying datas
-        var table = $('.product-table').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: "{{ route('product.index') }}",
-            columns: [
-                {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-                {data: 'name', name: 'name'},
-                {data: 'price', name: 'price'},
-                {data: 'category_id', name: 'category_name'},
-                {data: 'action', name: 'action', orderable: false, searchable: false},
-            ]
-        });
-        });
-    </script>
-</footer>
 </html>

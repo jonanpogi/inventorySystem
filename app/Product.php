@@ -8,6 +8,11 @@ use App\User;
 
 class Product extends Model
 {
+
+    protected $fillable = [
+        'name', 'price', 'category_id',
+    ];
+
     public function categories(){
         return $this->belongsTo(Category::class, 'category_id');
     }

@@ -22,7 +22,7 @@ class UserController extends Controller
         }
 
         if ($request->ajax()) {
-            $data = User::where([
+            $data = User::latest()->where([
                 ['status', 'Active'],
                 ['role', 'Customer']
                 ])->get();
