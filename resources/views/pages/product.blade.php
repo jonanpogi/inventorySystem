@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@include('layouts.app')
 
-@section('content')
+<main class="py-4">
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            @can('isAdmin')   
+             
             <div class="row justify-content-between">
                 <div class="col-4">
                     <h3>Products</h3>
@@ -14,36 +14,47 @@
                 </div>
             </div>
             
-            <table class="table table-hover" id="product-table">
-            <thead class="thead-dark">
+            <table class="table table-hover product-table">
+            <thead class="thead thead-dark">
                 <tr>
-
-                <th scope="col">Name</th>
-                <th scope="col">Category</th>
-                <th scope="col">Price</th>
-                <th scope="col">Action</th>
+                    <th>No</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Category</th>
+                    <th width="280px">Action</th>
                 </tr>
-            </thead>
             <tbody>
-                <tr>
-
-                <td>test</td>
-                <td>test</td>
-                <td>123</td>
-                <td>
-                    <button class="btn btn-success">Edit</button>
-                    <button class="btn btn-danger">Delete</button> 
-                </td>
-                </tr>
             </tbody>
-            </table>
-         
-            @endcan
-
-            @can('isCustomer')
-                <h3>HELLO CUSTOMER</h3>
-            @endcan
+        </table>
         </div>
     </div>
 </div>
-@endsection
+</main>
+</div>
+</body>
+<footer>
+    <script>
+        $(function () {
+     
+        $.ajaxSetup({
+        headers: {
+             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+        });
+        //displaying datas
+        var table = $('.product-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('product.index') }}",
+            columns: [
+                {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+                {data: 'name', name: 'name'},
+                {data: 'price', name: 'price'},
+                {data: 'category_id', name: 'category_name'},
+                {data: 'action', name: 'action', orderable: false, searchable: false},
+            ]
+        });
+        });
+    </script>
+</footer>
+</html>
