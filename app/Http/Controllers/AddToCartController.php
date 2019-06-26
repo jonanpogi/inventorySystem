@@ -17,7 +17,9 @@ class AddToCartController extends Controller
                         $join->on('product_user.product_id', '=', 'products.id')->select('products.name','products.price','product_user.id');
                     })->where('user_id', Auth::user()->id)->paginate(5);
         
-                    return view('pages.viewCart', compact('prod_user'));
+        $price = Auth::user()->products()->sum('price');
+        
+                    return view('pages.viewCart', compact('prod_user','price'));
     }
 
     public function addToCart($id)

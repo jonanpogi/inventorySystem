@@ -8,6 +8,8 @@ use DataTables;
 use App\Product;
 use App\Category;
 use DB;
+use Illuminate\Support\Facades\Input;
+use Intervention\Image\Facades\Image;
 
 class ProductController extends Controller
 {
@@ -55,10 +57,28 @@ class ProductController extends Controller
             'name' => 'required',
             'price' => 'required',
             'category_id' => 'required',
+            'image'  => 'required|image|mimes:jpg,png,gif|max:2048',
         ]);
-  
-        Product::create($request->all());
-   
+
+        $prod = Product::create($request->all());
+
+        if ($request->hasFile('image')) {
+            // $image = $request->file('image');
+            // // change image name to auto generated syntax
+            // $new_name = rand() . '.' . $image->getClientOriginalExtension();
+            // //save image to public/images
+            // $image->move(public_path('images'), $new_name);
+            // // save new image $file_name to database
+            // $prod->update(['image' => $new_name]);
+            $request->file('image')->store('public/images');
+    
+            // ensure every image has a different name
+            $file_name = $request->file('image')->hashName();
+            
+            // save new image $file_name to database
+            $prod->update(['image' => $file_name]);
+        }
+        
         return redirect()->route('product.index')->with('success','Product created successfully.');
     }
 
@@ -81,9 +101,9 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {   
-        // $category = Category::all();
-        // return view('pages.editProduct')->with($category);
-        return view('pages.editProduct',compact('product'));
+        $category = Category::all();
+      
+        return view('pages.editProduct',compact('product','category'));
     }
 
     /**

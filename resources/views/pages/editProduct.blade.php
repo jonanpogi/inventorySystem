@@ -31,12 +31,12 @@
                                 <input type="number" class="form-control" name="price" placeholder="Price" value="{{$product->price}}">
                             </div>
                         </div>
-                        <!-- <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
                                 <strong>Category</strong>
                                 <input class="form-control" name="category_id" placeholder="Category" value="{{$product->categories->name}}" disabled>
                             </div>
-                        </div> -->
+                        </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                                 <button type="submit" class="btn btn-primary btn-sm">Submit</button>
                         </div>

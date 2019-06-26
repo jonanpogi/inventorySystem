@@ -42,7 +42,21 @@
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                                <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                            <table class="table">
+                                <tr>
+                                    <td width="40%" style="align:right;"><label>Select File for Upload</label></td>
+                                    <td width="30%"><input type="file" name="image" /></td>
+                                    <td width="30%"></td>
+                                </tr>
+                                <tr>
+                                    <td width="40%"style="align:right;"></td>
+                                    <td width="30$"><span class="text-muted">jpg, png, gif</span></td>
+                                    <td width="30%"style="align:right;"></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                                <button type="submit" class="btn btn-primary btn-sm" name="upload">Submit</button>
                         </div>
                     </div>
                 

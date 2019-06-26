@@ -25,6 +25,6 @@ Route::post('product/{id}', 'AddToCartController@addToCart')->name('addtocart');
 Route::get('viewCart', 'AddToCartController@index');
 Route::delete('viewCart/{id}', 'AddToCartController@destroy')->name('deletecart');
 //image upload
-// Route::get('createProduct','ImageUploadController@create');
-// Route::post('createProduct','ImageUploadController@store');
+// Route::get('/upload', 'UploadfileController@index');
+// Route::post('/upload', 'UploadfileController@upload');
 

@@ -34,6 +34,7 @@
             <table class="table table-hover product-table">
             <thead class="thead thead-dark">
                 <tr>
+                    <th>Image<th>
                     <th>Name</th>
                     <th>Price</th>
                     <th>Category</th>
@@ -42,6 +43,7 @@
             <tbody>
             @foreach($products as $product)
                 <tr>
+                    <td><img width="50px" height="50px" src="{{ asset('storage/images/' . $product->image) }}"></td>
                     <td>{{$product->name}}</td>
                     <td>{{$product->price}}</td>
                     <td>{{$product->categories->name}}</td>

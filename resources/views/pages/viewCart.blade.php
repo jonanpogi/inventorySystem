@@ -20,7 +20,7 @@
                     <h3>My Cart</h3>
                 </div>
                 <div class="col-4">
-                    <h5>Total Cart Price:</h5>
+                    <h5>Total Cart Price: {{ $price }}</h5>
                 </div>
                 <div class="col-4">
                     <a class="btn btn-primary btn-sm" style="float: right;" href="{{ route('product.index') }}">Back</a>
