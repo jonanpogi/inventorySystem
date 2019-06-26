@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use DataTables;
 use App\Product;
 use App\Category;
+use DB;
 
 class ProductController extends Controller
 {

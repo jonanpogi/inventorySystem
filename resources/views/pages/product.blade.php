@@ -4,14 +4,31 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+
+            <!-- success message -->
+            @if ($message = Session::get('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <p>{{ $message }}</p>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
              
             <div class="row justify-content-between">
                 <div class="col-4">
                     <h3>Products</h3>
                 </div>
+                @can('isAdmin')
                 <div class="col-4">
                     <a class="btn btn-primary btn-sm" style="float: right;" href="{{ route('product.create') }}">Add Products</a>
                 </div>
+                @endcan
+                @can('isCustomer')
+                <div class="col-4">
+                    <a class="btn btn-primary btn-sm" style="float: right;" href="/viewCart">View My Kart</a>
+                </div>
+                @endcan
             </div>
             
             <table class="table table-hover product-table">
@@ -41,7 +58,11 @@
                     </form>
                     @endcan
                     @can('isCustomer')
-                        <button type="submit" class="btn btn-danger btn-sm">Add to Cart</button>
+                    <form action="{{ route('addtocart',$product->id) }}" method="POST">
+                    @csrf
+                    @method('POST')
+                        <button type="submit" class="btn btn-primary btn-sm">Add to Cart</button>
+                    </form>
                     @endcan
                     </td>
                 </tr>
