@@ -40,6 +40,7 @@
                     <th>Category</th>
                     <th width="280px">Action</th>
                 </tr>
+            </thead>
             <tbody>
             @foreach($products as $product)
                 <tr>

@@ -49,6 +49,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="/user">Users</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/archive">Archive</a>
+                            </li>
                             @endcan
                         @endif
                     </ul>
