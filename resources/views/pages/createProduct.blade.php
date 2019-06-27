@@ -13,7 +13,7 @@
                         <a class="btn btn-primary btn-sm" style="float: right;" href="{{ route('product.index') }}">Back</a>
                     </div>
                 </div>
-
+                <!-- if ever uploading file add enctype="multipart/form-data" -->
                 <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                 

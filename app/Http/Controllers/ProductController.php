@@ -57,7 +57,7 @@ class ProductController extends Controller
             'name' => 'required',
             'price' => 'required',
             'category_id' => 'required',
-            'image'  => 'required|image|mimes:jpg,png,gif|max:2048',
+            'image'  => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:4096',
         ]);
 
         $prod = Product::create($request->all());
@@ -118,10 +118,29 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required',
             'price' => 'required',
+            'image'  => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:4096',
             
         ]);
   
         $product->update($request->all());
+      
+
+        if ($request->hasFile('image')) {
+            // $image = $request->file('image');
+            // // change image name to auto generated syntax
+            // $new_name = rand() . '.' . $image->getClientOriginalExtension();
+            // //save image to public/images
+            // $image->move(public_path('images'), $new_name);
+            // // save new image $file_name to database
+            // $prod->update(['image' => $new_name]);
+            $request->file('image')->store('public/images');
+    
+            // ensure every image has a different name
+            $file_name = $request->file('image')->hashName();
+            
+            // save new image $file_name to database
+            $product->update(['image' => $file_name]);
+        }
   
         return redirect()->route('product.index')->with('success','Product updated successfully');
     }
