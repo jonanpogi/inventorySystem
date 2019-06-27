@@ -12,9 +12,10 @@ class AddToCartController extends Controller
 {
     public function index()
     {
+        //select() function doesnt need anymore 
         $prod_user = DB::table('products')
                     ->join('product_user', function($join){
-                        $join->on('product_user.product_id', '=', 'products.id')->select('products.name','products.price','product_user.id');
+                        $join->on('product_user.product_id', '=', 'products.id');
                     })->where('user_id', Auth::user()->id)->paginate(5);
         
         $price = Auth::user()->products()->sum('price');

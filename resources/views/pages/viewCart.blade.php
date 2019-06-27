@@ -30,6 +30,7 @@
             <table class="table table-hover product-table">
             <thead class="thead thead-dark">
                 <tr>
+                    <th>Image</th>
                     <th>Name</th>
                     <th>Price</th>
                     <th width="280px">Action</th>
@@ -38,6 +39,7 @@
             <tbody>
             @foreach($prod_user as $p_u)
                 <tr>
+                    <td><img width="50px" height="50px" src="{{ asset('storage/images/' . $p_u->image) }}"></td>
                     <td>{{$p_u->name}}</td>
                     <td>{{$p_u->price}}</td>
                     <td>

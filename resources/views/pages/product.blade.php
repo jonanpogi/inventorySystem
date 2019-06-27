@@ -17,7 +17,7 @@
              
             <div class="row justify-content-between">
                 <div class="col-4">
-                    <h3>Products</h3>
+                    <h3>Products List</h3>
                 </div>
                 @can('isAdmin')
                 <div class="col-4">
@@ -31,7 +31,7 @@
                 @endcan
             </div>
             
-            <table class="table table-hover product-table">
+            <table class="table table-hover product-table" id="product-table">
             <thead class="thead thead-dark">
                 <tr>
                     <th>Image<th>
@@ -58,12 +58,12 @@
                         @method('DELETE')
         
                         <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                    </form>
-                    @endcan
-                    @can('isCustomer')
-                    <form action="{{ route('addtocart',$product->id) }}" method="POST">
-                    @csrf
-                    @method('POST')
+                        </form>
+                        @endcan
+                        @can('isCustomer')
+                        <form action="{{ route('addtocart',$product->id) }}" method="POST">
+                        @csrf
+                        @method('POST')
                         <button type="submit" class="btn btn-primary btn-sm">Add to Cart</button>
                     </form>
                     @endcan
